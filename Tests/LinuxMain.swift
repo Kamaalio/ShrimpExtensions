@@ -3,5 +3,5 @@ import XCTest
 import ShrimpExtensionsTests
 
 var tests = [XCTestCaseEntry]()
-tests += ShrimpExtensionsTests.allTests()
+tests += DateTests.allTests()
 XCTMain(tests)
