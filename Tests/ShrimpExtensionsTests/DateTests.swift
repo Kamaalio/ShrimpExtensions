@@ -18,7 +18,9 @@ final class DateTests: XCTestCase {
         ("testIsFutureWeek", testIsFutureWeek),
         ("testIsFutureWeekIsNotFutureWeek", testIsFutureWeekIsInLowerWeekNumber),
         ("testCreateDateFromComponents", testCreateDateFromComponents),
-        ("testIsFutureWeekIsInLowerYearNumber", testIsFutureWeekIsInLowerYearNumber)
+        ("testIsFutureWeekIsInLowerYearNumber", testIsFutureWeekIsInLowerYearNumber),
+        ("testDateOfWeek", testDateOfWeek),
+        ("testIntervalByDays", testIntervalByDays)
     ]
 }
 
@@ -80,6 +82,27 @@ extension DateTests {
         let date2 = DateTestsHelpers.createDateFromComponents(day: 21, month: 2, year: 2021)!
 
         XCTAssertFalse(date1.isFutureWeek(from: date2))
+    }
+}
+
+// - MARK: intervalByDays
+
+extension DateTests {
+    func testIntervalByDays() {
+        let date = DateTestsHelpers.createDateFromComponents(day: 23, month: 2, year: 2021)!
+        let intervalByDays = date.intervalByDays(days: 2 * 7)
+        let secondsPerMinute = 60
+        let minutesPerHour = 60
+        let hoursPerDay = 24
+        XCTAssertEqual(TimeInterval(2 * 7 * hoursPerDay * minutesPerHour * secondsPerMinute), intervalByDays)
+    }
+}
+
+// - MARK: dateOfWeek
+
+extension DateTests {
+    func testDateOfWeek() {
+//        let date = DateTestsHelpers.createDateFromComponents(day: 23, month: 1, year: 2021)!
     }
 }
 
