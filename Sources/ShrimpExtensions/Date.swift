@@ -26,7 +26,10 @@ public extension Date {
 
     func isFutureWeek(from date: Date) -> Bool {
         let selfDate = self
-        return selfDate.weekNumber > date.weekNumber && selfDate.yearNumber >= date.yearNumber
+        if selfDate.yearNumber != date.yearNumber {
+            return selfDate.yearNumber > date.yearNumber
+        }
+        return selfDate.weekNumber > date.weekNumber
     }
 
     func isSameDay(as date: Date) -> Bool {
