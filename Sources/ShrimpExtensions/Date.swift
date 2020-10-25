@@ -48,7 +48,7 @@ public extension Date {
     }
 
     var yearNumber: Int {
-        Calendar.current.component(.year, from: self)
+        Calendar.current.component(.yearForWeekOfYear, from: self)
     }
 
     enum Weekday: Int {
