@@ -19,6 +19,17 @@ public extension Date {
         return dates
     }
 
+    func adding(minutes: Int) -> Date {
+        Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
+    }
+
+    @available(OSX 10.13, *)
+    func toIsoString() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions.insert(.withFractionalSeconds)
+        return formatter.string(from: self)
+    }
+
     func isFromSameWeek(as date: Date) -> Bool {
         let selfDate = self
         return selfDate.weekNumber == date.weekNumber && selfDate.yearNumber == date.yearNumber
