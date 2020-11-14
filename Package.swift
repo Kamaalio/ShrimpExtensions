@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "ShrimpExtensions",
+    platforms: [
+        .iOS(.v8), .tvOS(.v9), .macOS(.v10_10)
+    ],
     products: [
         .library(
             name: "ShrimpExtensions",
