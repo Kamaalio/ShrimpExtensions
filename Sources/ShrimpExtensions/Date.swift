@@ -23,7 +23,7 @@ public extension Date {
         Calendar.current.date(byAdding: .minute, value: minutes, to: self)!
     }
 
-    @available(OSX 10.13, *)
+    @available(OSX 10.13, iOS 11.0, tvOS 11.0, *)
     func toIsoString() -> String {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions.insert(.withFractionalSeconds)
