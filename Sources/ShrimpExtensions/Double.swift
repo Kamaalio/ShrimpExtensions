@@ -12,4 +12,8 @@ public extension Double {
         let calculation = (self / whole) * 100
         return calculation
     }
+
+    var isDecimal: Bool {
+        floor(self) == self
+    }
 }
