@@ -25,4 +25,8 @@ public extension String {
         }
         return chunks
     }
+
+    var trimmingByWhitespacesAndNewLines: String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 }
