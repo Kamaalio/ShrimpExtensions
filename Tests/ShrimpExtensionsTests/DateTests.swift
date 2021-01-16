@@ -5,6 +5,7 @@
 //  Created by Kamaal Farah on 24/10/2020.
 //
 
+#if !os(watchOS)
 import XCTest
 @testable import ShrimpExtensions
 
@@ -126,3 +127,4 @@ struct DateTestsHelpers {
         return Calendar.current.date(from: dateComponents)
     }
 }
+#endif
