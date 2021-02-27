@@ -29,4 +29,12 @@ public extension String {
     var trimmingByWhitespacesAndNewLines: String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
+
+    var nsString: NSString? {
+        NSString(utf8String: self)
+    }
+
+    var uuid: UUID? {
+        UUID(uuidString: self)
+    }
 }
