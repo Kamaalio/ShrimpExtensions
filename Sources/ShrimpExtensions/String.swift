@@ -13,14 +13,14 @@ public extension String {
             .enumerated()
             .filter { $0.element.isUppercase }
             .map { $0.offset })
-        let chunks = self
+        let chunks: [String] = self
             .map { String($0) }
             .enumerated()
-            .reduce([String]()) { (chunks: [String], elm: (offset: Int, element: String)) -> [String] in
+            .reduce([]) { (chunks: [String], elm: (offset: Int, element: String)) in
                 guard !chunks.isEmpty else { return [elm.element] }
                 guard !indexes.contains(elm.offset) else { return chunks + [String(elm.element)] }
                 var chunks = chunks
-                chunks[chunks.count-1] += String(elm.element)
+                chunks[chunks.count - 1] += String(elm.element)
                 return chunks
         }
         return chunks
