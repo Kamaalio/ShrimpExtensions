@@ -8,6 +8,14 @@
 import Foundation
 
 public extension Date {
+    func nextDays(till amountOfDays: Int, offset: Int = 0) -> [Date] {
+        guard amountOfDays > 0,
+              let date = Calendar.current.date(byAdding: .day, value: offset, to: self) else { return [] }
+        return (0..<amountOfDays).compactMap {
+            Calendar.current.date(byAdding: .day, value: $0, to: date)
+        }
+    }
+
     func datesOfWeek(weekOffset: Int = 0) -> [Date] {
         var dates = [Date]()
         for index in 1...7 {
@@ -60,6 +68,20 @@ public extension Date {
 
     var yearNumber: Int {
         Calendar.current.component(.yearForWeekOfYear, from: self)
+    }
+
+    var startOfDay : Date {
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day])
+        let components = calendar.dateComponents(unitFlags, from: self)
+        return calendar.date(from: components)!
+   }
+
+    var endOfDay : Date {
+        var components = DateComponents()
+        components.day = 1
+        let date = Calendar.current.date(byAdding: components, to: self.startOfDay)
+        return (date?.addingTimeInterval(-1))!
     }
 
     enum Weekday: Int {

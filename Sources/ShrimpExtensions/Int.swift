@@ -11,4 +11,8 @@ public extension Int {
     var int64: Int64 {
         Int64(self)
     }
+
+    var nsNumber: NSNumber {
+        NSNumber(value: self)
+    }
 }
