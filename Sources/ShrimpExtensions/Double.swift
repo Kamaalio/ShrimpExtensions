@@ -29,4 +29,8 @@ public extension Double {
         let calculation = (self / whole) * 100
         return calculation
     }
+
+    func toFixed(_ precision: Int) -> String {
+        String(format: "€%.\(precision)f", self)
+    }
 }
