@@ -58,6 +58,14 @@ public extension Date {
             && selfDate.yearNumber == date.yearNumber
     }
 
+    func isBetween(date date1: Date, andDate date2: Date) -> Bool {
+        date1.compare(self) == self.compare(date2)
+    }
+
+    var asNSDate: NSDate {
+        self as NSDate
+    }
+
     var dayNumberOfWeek: Int {
         Calendar.current.component(.day, from: self)
     }
