@@ -31,6 +31,6 @@ public extension Double {
     }
 
     func toFixed(_ precision: Int) -> String {
-        String(format: "€%.\(precision)f", self)
+        String(format: "%.\(precision)f", self)
     }
 }
