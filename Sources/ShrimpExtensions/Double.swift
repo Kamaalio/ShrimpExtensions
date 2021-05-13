@@ -25,6 +25,10 @@ public extension Double {
         CGFloat(self)
     }
 
+    var nsNumber: NSNumber {
+        self as NSNumber
+    }
+
     func percentageOf(_ whole: Double) -> Double {
         let calculation = (self / whole) * 100
         return calculation
