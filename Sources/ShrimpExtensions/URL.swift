@@ -12,11 +12,6 @@ public extension URL {
         self.init(string: "\(staticString)")!
     }
 
-    /// Will be deprecated soon, use `decodeJSON` instead
-    func getJSON<T: Codable>() -> Result<T, Error> {
-        decodeJSON()
-    }
-
     func decodeJSON<T: Codable>() -> Result<T, Error> {
         let data: Data
         do {
