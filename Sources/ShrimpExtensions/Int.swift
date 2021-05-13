@@ -13,6 +13,6 @@ public extension Int {
     }
 
     var nsNumber: NSNumber {
-        NSNumber(value: self)
+        self as NSNumber
     }
 }
