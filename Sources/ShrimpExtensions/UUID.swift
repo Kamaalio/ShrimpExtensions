@@ -8,7 +8,7 @@
 import Foundation
 
 public extension UUID {
-    var nsString: NSString? {
-        NSString(utf8String: self.uuidString)
+    var nsString: NSString {
+        self.uuidString as NSString
     }
 }
