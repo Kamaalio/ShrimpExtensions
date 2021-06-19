@@ -8,6 +8,52 @@
 import Foundation
 
 public extension Date {
+    enum Weekday: Int {
+        case Sunday = 1
+        case Monday = 2
+        case Tuesday = 3
+        case Wednesday = 4
+        case Thursday = 5
+        case Friday = 6
+        case Saturday = 7
+    }
+
+    var asNSDate: NSDate {
+        self as NSDate
+    }
+
+    var dayNumberOfWeek: Int {
+        Calendar.current.component(.day, from: self)
+    }
+
+    var weekNumber: Int {
+        Calendar.current.component(.weekOfYear, from: self)
+    }
+
+    var yearNumber: Int {
+        Calendar.current.component(.yearForWeekOfYear, from: self)
+    }
+
+    var startOfDay : Date {
+        let calendar = Calendar.current
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day])
+        let components = calendar.dateComponents(unitFlags, from: self)
+        return calendar.date(from: components)!
+   }
+
+    var endOfDay : Date {
+        var components = DateComponents()
+        components.day = 1
+        let date = Calendar.current.date(byAdding: components, to: self.startOfDay)
+        return (date?.addingTimeInterval(-1))!
+    }
+
+    func getFormattedDateString(withFormat format: String) -> String {
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = format
+        return dateformat.string(from: self)
+    }
+
     func nextDays(till amountOfDays: Int, offset: Int = 0) -> [Date] {
         guard amountOfDays > 0,
               let date = Calendar.current.date(byAdding: .day, value: offset, to: self) else { return [] }
@@ -61,49 +107,9 @@ public extension Date {
     func isBetween(date date1: Date, andDate date2: Date) -> Bool {
         date1.compare(self) == self.compare(date2)
     }
-
-    var asNSDate: NSDate {
-        self as NSDate
-    }
-
-    var dayNumberOfWeek: Int {
-        Calendar.current.component(.day, from: self)
-    }
-
-    var weekNumber: Int {
-        Calendar.current.component(.weekOfYear, from: self)
-    }
-
-    var yearNumber: Int {
-        Calendar.current.component(.yearForWeekOfYear, from: self)
-    }
-
-    var startOfDay : Date {
-        let calendar = Calendar.current
-        let unitFlags = Set<Calendar.Component>([.year, .month, .day])
-        let components = calendar.dateComponents(unitFlags, from: self)
-        return calendar.date(from: components)!
-   }
-
-    var endOfDay : Date {
-        var components = DateComponents()
-        components.day = 1
-        let date = Calendar.current.date(byAdding: components, to: self.startOfDay)
-        return (date?.addingTimeInterval(-1))!
-    }
-
-    enum Weekday: Int {
-        case Sunday = 1
-        case Monday = 2
-        case Tuesday = 3
-        case Wednesday = 4
-        case Thursday = 5
-        case Friday = 6
-        case Saturday = 7
-    }
 }
 
-internal extension Date {
+extension Date {
     func dateOfWeek(weekday targetDayOfWeek: Weekday, weekOffset: Int = 0) -> Date {
         var selfDate = self
         let weekInterval = intervalByDays(days: weekOffset * 7)
