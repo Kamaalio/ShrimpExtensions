@@ -20,6 +20,25 @@ public extension Array where Element: Hashable {
         return buffer
     }
 
+    // - TODO: REMOVE THIS IN MAJOR VERSION UPDATE
+    /// Will be removed in major version update
+    mutating func prepend(_ element: Element) {
+        self.insert(element, at: 0)
+    }
+
+    // - TODO: REMOVE THIS IN MAJOR VERSION UPDATE
+    /// Will be removed in major version update
+    func prepended(_ element: Element) -> [Element] {
+        [element] + self
+    }
+}
+
+public extension Array {
+    /// Transforms `Array` to an `NSSet`
+    var asNSSet: NSSet {
+        NSSet(array: self)
+    }
+
     mutating func prepend(_ element: Element) {
         self.insert(element, at: 0)
     }
