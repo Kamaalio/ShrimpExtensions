@@ -15,6 +15,14 @@ public extension Dictionary {
         })
     }
 
+    func merged(with dict: [Key: Value]) -> [Key: Value] {
+        var mergedDict = self
+        for (key, value) in dict {
+            mergedDict[key] = value
+        }
+        return mergedDict
+    }
+
     func has(key: Key) -> Bool {
         index(forKey: key) != nil
     }

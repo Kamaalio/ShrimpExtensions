@@ -37,4 +37,21 @@ public extension String {
     var uuid: UUID? {
         UUID(uuidString: self)
     }
+
+    var scrambled: String {
+        String(self.shuffled())
+    }
+
+    var digits: String {
+        components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+
+    func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
+        guard !targets.isEmpty else { return self }
+        var stringToEdit = self.asArray()
+        for (index, character) in self.enumerated() where targets.contains(character) {
+            stringToEdit[index] = replacement
+        }
+        return String(stringToEdit)
+    }
 }
