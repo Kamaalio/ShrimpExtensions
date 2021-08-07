@@ -42,6 +42,10 @@ public extension String {
         String(self.shuffled())
     }
 
+    var digits: String {
+        components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+
     func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
         let characters = self.map { character -> Character in
             if targets.contains(character) {
