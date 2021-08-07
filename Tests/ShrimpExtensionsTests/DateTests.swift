@@ -9,21 +9,7 @@
 import XCTest
 @testable import ShrimpExtensions
 
-final class DateTests: XCTestCase {
-    static var allTests = [
-        ("testIsFromSameWeekIsInSameWeek", testIsFromSameWeekIsInSameWeek),
-        ("testIsFromSameWeekIsInSameWeekNumberButDiffrentYear", testIsFromSameWeekIsInSameWeekNumberButDiffrentYear),
-        ("testIsFromSameWeekIsNotInSameWeek", testIsFromSameWeekIsNotInSameWeek),
-        ("testIsFutureWeekIsInLowerWeekNumberButHigherYearNumber",
-         testIsFutureWeekIsInLowerWeekNumberButHigherYearNumber),
-        ("testIsFutureWeek", testIsFutureWeek),
-        ("testIsFutureWeekIsNotFutureWeek", testIsFutureWeekIsInLowerWeekNumber),
-        ("testCreateDateFromComponents", testCreateDateFromComponents),
-        ("testIsFutureWeekIsInLowerYearNumber", testIsFutureWeekIsInLowerYearNumber),
-        ("testDateOfWeek", testDateOfWeek),
-        ("testIntervalByDays", testIntervalByDays)
-    ]
-}
+final class DateTests: XCTestCase { }
 
 // - MARK: isFromSameWeek
 
@@ -32,24 +18,21 @@ extension DateTests {
         let date1 = DateTestsHelpers.createDateFromComponents(day: 23, month: 10, year: 2020)!
         let date2 = DateTestsHelpers.createDateFromComponents(day: 23, month: 10, year: 2020)!
 
-        XCTAssert(date1.isFromSameWeek(as: date2),
-                  "Is in same week and differs 2 days")
+        XCTAssert(date1.isFromSameWeek(as: date2))
     }
 
     func testIsFromSameWeekIsInSameWeekNumberButDiffrentYear() {
         let date1 = DateTestsHelpers.createDateFromComponents(day: 23, month: 10, year: 2020)!
         let date2 = DateTestsHelpers.createDateFromComponents(day: 28, month: 10, year: 2021)!
 
-        XCTAssertFalse(date1.isFromSameWeek(as: date2),
-                       "Has same weeknumber but is in a diffrent year")
+        XCTAssertFalse(date1.isFromSameWeek(as: date2))
     }
 
     func testIsFromSameWeekIsNotInSameWeek() {
         let date1 = DateTestsHelpers.createDateFromComponents(day: 23, month: 10, year: 2020)!
         let date2 = DateTestsHelpers.createDateFromComponents(day: 26, month: 10, year: 2020)!
 
-        XCTAssertFalse(date1.isFromSameWeek(as: date2),
-                       "Is in next week")
+        XCTAssertFalse(date1.isFromSameWeek(as: date2))
     }
 }
 
@@ -60,8 +43,7 @@ extension DateTests {
         let date1 = DateTestsHelpers.createDateFromComponents(day: 23, month: 1, year: 2021)!
         let date2 = DateTestsHelpers.createDateFromComponents(day: 26, month: 10, year: 2020)!
 
-        XCTAssert(date1.isFutureWeek(from: date2),
-                  "Is from future year but has a lower week number")
+        XCTAssert(date1.isFutureWeek(from: date2))
     }
 
     func testIsFutureWeek() {
@@ -96,14 +78,6 @@ extension DateTests {
         let minutesPerHour = 60
         let hoursPerDay = 24
         XCTAssertEqual(TimeInterval(2 * 7 * hoursPerDay * minutesPerHour * secondsPerMinute), intervalByDays)
-    }
-}
-
-// - MARK: dateOfWeek
-
-extension DateTests {
-    func testDateOfWeek() {
-//        let date = DateTestsHelpers.createDateFromComponents(day: 23, month: 1, year: 2021)!
     }
 }
 
