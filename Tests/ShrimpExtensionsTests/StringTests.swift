@@ -76,4 +76,16 @@ extension StringTests {
         let expectedResult = "yaa 22"
         XCTAssertEqual(testCase, expectedResult)
     }
+
+    func testReplaceMultipleOccurrencesWithNoTargets() {
+        let testCase = "yes 22".replaceMultipleOccurrences(of: [], with: "a")
+        let expectedResult = "yes 22"
+        XCTAssertEqual(testCase, expectedResult)
+    }
+
+    func testReplaceMultipleOccurrencesWithNoMatchingTargets() {
+        let testCase = "yes 22".replaceMultipleOccurrences(of: ["z", "k"], with: "a")
+        let expectedResult = "yes 22"
+        XCTAssertEqual(testCase, expectedResult)
+    }
 }

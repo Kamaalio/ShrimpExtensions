@@ -47,12 +47,11 @@ public extension String {
     }
 
     func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
-        let characters = self.map { character -> Character in
-            if targets.contains(character) {
-                return replacement
-            }
-            return character
+        guard !targets.isEmpty else { return self }
+        var stringToEdit = self.asArray()
+        for (index, character) in self.enumerated() where targets.contains(character) {
+            stringToEdit[index] = replacement
         }
-        return String(characters)
+        return String(stringToEdit)
     }
 }
