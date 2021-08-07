@@ -1,0 +1,11 @@
+name: CI
+on: push
+jobs:
+  buildAndTest:
+    name: build and test
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build and Test
+        run: |
+          sh Scripts/run_tests.sh
