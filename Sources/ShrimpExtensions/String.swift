@@ -37,4 +37,14 @@ public extension String {
     var uuid: UUID? {
         UUID(uuidString: self)
     }
+
+    func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
+        let characters = self.map { character -> Character in
+            if targets.contains(character) {
+                return replacement
+            }
+            return character
+        }
+        return String(characters)
+    }
 }
