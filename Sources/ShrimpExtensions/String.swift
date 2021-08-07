@@ -38,6 +38,10 @@ public extension String {
         UUID(uuidString: self)
     }
 
+    var scrambled: String {
+        String(self.shuffled())
+    }
+
     func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
         let characters = self.map { character -> Character in
             if targets.contains(character) {
