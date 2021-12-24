@@ -54,4 +54,8 @@ public extension String {
         }
         return String(stringToEdit)
     }
+
+    subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
+    }
 }
