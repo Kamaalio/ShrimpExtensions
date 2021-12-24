@@ -17,3 +17,14 @@ public extension Optional {
         return wrapped
     }
 }
+
+public extension Optional where Wrapped == Int {
+    mutating func add(_ increment: Int) {
+        self = self.added(increment)
+    }
+
+    func added(_ increment: Int) -> Int? {
+        guard let self = self else { return nil }
+        return self + increment
+    }
+}
