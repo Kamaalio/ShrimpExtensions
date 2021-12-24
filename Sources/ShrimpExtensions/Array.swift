@@ -34,6 +34,14 @@ public extension Array where Element: Hashable {
 }
 
 public extension Array {
+    func findIndex<T: Equatable>(by keyPath: KeyPath<Element, T>, is comparisonValue: T) -> Int? {
+        self.findIndex(where: { $0[keyPath: keyPath] == comparisonValue })
+    }
+
+    func findIndex(where predicate: (Element) throws -> Bool) rethrows -> Int? {
+        try self.firstIndex(where: predicate)
+    }
+
     /// Transforms `Array` to an `NSSet`
     var asNSSet: NSSet {
         NSSet(array: self)
