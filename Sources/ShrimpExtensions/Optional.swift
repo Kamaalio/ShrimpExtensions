@@ -17,3 +17,18 @@ public extension Optional {
         return wrapped
     }
 }
+
+public extension Optional where Wrapped == Int {
+    /// Adds increment to value if value is not nil.
+    /// - Parameter increment: value to increment by.
+    mutating func add(_ increment: Int) {
+        self = self.added(increment)
+    }
+
+    /// Adds increment to value if value is not nil and returns that value.
+    /// - Parameter increment: value to increment by.
+    func added(_ increment: Int) -> Int? {
+        guard let self = self else { return nil }
+        return self + increment
+    }
+}
