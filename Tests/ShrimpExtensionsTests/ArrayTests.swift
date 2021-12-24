@@ -24,6 +24,17 @@ extension ArrayTests {
         XCTAssertEqual(result, 2)
     }
 
+    func testCouldNotFindIndexWithKeyPath() {
+        let equatableArray: [SomeEquatableObject] = [
+            .init(foo: false, bar: 0),
+            .init(foo: false, bar: 1),
+            .init(foo: false, bar: 2),
+            .init(foo: false, bar: 3)
+        ]
+        let result = equatableArray.findIndex(by: \.bar, is: 4)
+        XCTAssertNil(result)
+    }
+
     private struct SomeEquatableObject: Equatable {
         let foo: Bool
         let bar: Int
