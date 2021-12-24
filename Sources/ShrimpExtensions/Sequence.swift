@@ -12,4 +12,12 @@ public extension Sequence {
     func asArray() -> [Iterator.Element] {
         Array(self)
     }
+
+    func find<T: Equatable>(by keyPath: KeyPath<Element, T>, is comparisonValue: T) -> Element? {
+        find(where: { $0[keyPath: keyPath] == comparisonValue })
+    }
+
+    func find(where predicate: (Element) throws -> Bool) rethrows -> Element? {
+        try self.first(where: predicate)
+    }
 }
