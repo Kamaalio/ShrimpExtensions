@@ -89,3 +89,13 @@ extension StringTests {
         XCTAssertEqual(testCase, expectedResult)
     }
 }
+
+// - MARK: subscript
+
+extension StringTests {
+    func testSubscript() {
+        let character = "Hallo"[0]
+        let expectedResult = Character("H")
+        XCTAssertEqual(character, expectedResult)
+    }
+}
