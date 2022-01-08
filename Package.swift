@@ -13,13 +13,20 @@ let package = Package(
             name: "ShrimpExtensions",
             targets: ["ShrimpExtensions"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/Quick/Quick.git", "4.0.0"..<"5.0.0"),
+        .package(url: "https://github.com/Quick/Nimble.git", "9.0.0"..<"10.0.0"),
+    ],
     targets: [
         .target(
             name: "ShrimpExtensions",
             dependencies: []),
         .testTarget(
             name: "ShrimpExtensionsTests",
-            dependencies: ["ShrimpExtensions"]),
+            dependencies: [
+                "ShrimpExtensions",
+                "Quick",
+                "Nimble",
+            ]),
     ]
 )
