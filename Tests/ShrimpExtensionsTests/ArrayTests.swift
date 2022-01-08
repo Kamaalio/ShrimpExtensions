@@ -5,7 +5,6 @@
 //  Created by Kamaal M Farah on 24/12/2021.
 //
 
-import XCTest
 import Quick
 import Nimble
 
@@ -14,7 +13,7 @@ import Nimble
 final class ArraySpec: QuickSpec {
     override func spec() {
 
-        // - MARK: At
+        // - MARK: at
 
         describe("at") {
             context("Gets elements with given index") {
@@ -47,34 +46,32 @@ final class ArraySpec: QuickSpec {
             }
         }
 
-    }
-}
+        // - MARK: findIndex
 
-final class ArrayTests: XCTestCase { }
+        describe("findIndex") {
+            it("finds the index with a key path") {
+                let equatableArray: [SomeEquatableObject] = [
+                    .init(foo: false, bar: 0),
+                    .init(foo: false, bar: 1),
+                    .init(foo: true, bar: 2),
+                    .init(foo: false, bar: 3)
+                ]
+                let result = equatableArray.findIndex(by: \.foo, is: true)
+                expect(result).to(equal(2))
+            }
 
-// - MARK: findIndex
+            it("could not find index with a key path") {
+                let equatableArray: [SomeEquatableObject] = [
+                    .init(foo: false, bar: 0),
+                    .init(foo: false, bar: 1),
+                    .init(foo: false, bar: 2),
+                    .init(foo: false, bar: 3)
+                ]
+                let result = equatableArray.findIndex(by: \.bar, is: 4)
+                expect(result).to(beNil())
+            }
+        }
 
-extension ArrayTests {
-    func testFindIndexWithKeyPath() {
-        let equatableArray: [SomeEquatableObject] = [
-            .init(foo: false, bar: 0),
-            .init(foo: false, bar: 1),
-            .init(foo: true, bar: 2),
-            .init(foo: false, bar: 3)
-        ]
-        let result = equatableArray.findIndex(by: \.foo, is: true)
-        XCTAssertEqual(result, 2)
-    }
-
-    func testCouldNotFindIndexWithKeyPath() {
-        let equatableArray: [SomeEquatableObject] = [
-            .init(foo: false, bar: 0),
-            .init(foo: false, bar: 1),
-            .init(foo: false, bar: 2),
-            .init(foo: false, bar: 3)
-        ]
-        let result = equatableArray.findIndex(by: \.bar, is: 4)
-        XCTAssertNil(result)
     }
 
     private struct SomeEquatableObject: Equatable {
