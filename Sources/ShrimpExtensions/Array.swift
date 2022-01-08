@@ -34,6 +34,19 @@ public extension Array where Element: Hashable {
 }
 
 public extension Array {
+    /// Gets element at a specific given index. When a negative index has been given the indexing will be reversed.
+    /// - Parameter index: A positive or negative index to access elements of this array.
+    /// - Returns: Returns the element at the given index. If index is out of range, than this method will return nil.
+    func at(_ index: Int) -> Element? {
+        guard index < self.underestimatedCount else { return nil }
+        if index >= 0 {
+            return self[index]
+        }
+        let reversedIndex = self.count + index
+        guard reversedIndex >= 0 else { return nil }
+        return self[reversedIndex]
+    }
+
     /// Returns the first index of the sequence that satisfies the given key path and comparison value.
     ///
     /// - Complexity: O(*n*), where *n* is the length of the sequence.
