@@ -8,6 +8,11 @@
 import Foundation
 
 public extension Array where Element: Hashable {
+    /// Transforms array to a `Set`
+    var toSet: Set<Element> {
+        Set(self)
+    }
+
     func uniques() -> [Element] {
         var buffer = Array()
         var added = Set<Element>()
