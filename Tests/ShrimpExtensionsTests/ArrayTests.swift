@@ -13,6 +13,24 @@ import Nimble
 final class ArraySpec: QuickSpec {
     override func spec() {
 
+        // - MARK: toSet
+
+        describe("toSet") {
+            context("Transforms array to set") {
+                let cases = [
+                    ([1, 2, 2], [1, 2]),
+                    ([1, 2, 3], [1, 2, 3]),
+                ]
+                func ascending(_ num1: Int, _ num2: Int) -> Bool { num1 < num2 }
+                for (input, expectedResult) in cases {
+                    it("transforms \(input) to \(expectedResult)") {
+                        let set = input.toSet
+                        expect(set.sorted(by: ascending(_:_:))) == expectedResult.sorted(by: ascending(_:_:))
+                    }
+                }
+            }
+        }
+
         // - MARK: at
 
         describe("at") {
