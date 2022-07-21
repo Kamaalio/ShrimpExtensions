@@ -39,6 +39,24 @@ public extension Array where Element: Hashable {
 }
 
 public extension Array {
+    /// Sorts array by given keyPath using the given comparision result.
+    /// - Parameters:
+    ///   - keyPath: The keyPath of the object to sort by.
+    ///   - comparison: The comparison method.
+    /// - Returns: A sorted array.
+    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>, using comparison: ComparisonResult) -> [Element] {
+        sorted(by: {
+            switch comparison {
+            case .orderedAscending:
+                return $0[keyPath: keyPath] < $1[keyPath: keyPath]
+            case .orderedDescending:
+                return $0[keyPath: keyPath] > $1[keyPath: keyPath]
+            case .orderedSame:
+                return $0[keyPath: keyPath] == $1[keyPath: keyPath]
+            }
+        })
+    }
+
     /// Gets element at a specific given index. When a negative index has been given the indexing will be reversed.
     /// - Parameter index: A positive or negative index to access elements of this array.
     /// - Returns: Returns the element at the given index. If index is out of range, than this method will return nil.
