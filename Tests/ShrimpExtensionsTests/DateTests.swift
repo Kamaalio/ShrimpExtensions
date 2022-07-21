@@ -11,6 +11,21 @@ import XCTest
 
 final class DateTests: XCTestCase { }
 
+// - MARK: isBeforeToday
+
+extension DateTests {
+}
+
+// - MARK: isTomorrow
+
+extension DateTests {
+}
+
+// - MARK: isYesterday
+
+extension DateTests {
+}
+
 // - MARK: isFromSameWeek
 
 extension DateTests {
