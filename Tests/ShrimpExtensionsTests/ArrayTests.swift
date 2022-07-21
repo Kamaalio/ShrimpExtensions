@@ -90,6 +90,40 @@ final class ArraySpec: QuickSpec {
             }
         }
 
+        // - MARK: sorted
+
+        describe("sorted") {
+            it("sorts by order ascending") {
+                let equatableArray: [SomeEquatableObject] = [
+                    .init(foo: false, bar: 10),
+                    .init(foo: false, bar: 4),
+                    .init(foo: false, bar: 0),
+                    .init(foo: false, bar: 8)
+                ]
+                expect(equatableArray.sorted(by: \.bar, using: .orderedAscending).map(\.bar)) == [0, 4, 8, 10]
+            }
+
+            it("sorts by order descending") {
+                let equatableArray: [SomeEquatableObject] = [
+                    .init(foo: false, bar: 10),
+                    .init(foo: false, bar: 4),
+                    .init(foo: false, bar: 0),
+                    .init(foo: false, bar: 8)
+                ]
+                expect(equatableArray.sorted(by: \.bar, using: .orderedDescending).map(\.bar)) == [10, 8, 4, 0]
+            }
+
+            it("sorts by order same") {
+                let equatableArray: [SomeEquatableObject] = [
+                    .init(foo: false, bar: 10),
+                    .init(foo: false, bar: 4),
+                    .init(foo: false, bar: 0),
+                    .init(foo: false, bar: 8)
+                ]
+                expect(equatableArray.sorted(by: \.bar, using: .orderedSame).map(\.bar)) == [10, 4, 0, 8]
+            }
+        }
+
     }
 
     private struct SomeEquatableObject: Equatable {
