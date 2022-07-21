@@ -34,6 +34,24 @@ public extension Date {
         Calendar.current.component(.yearForWeekOfYear, from: self)
     }
 
+    /// Is any day before today
+    var isBeforeToday: Bool {
+        let selfDate = self
+        let today = Date()
+        return (selfDate.dayNumberOfWeek < (today.dayNumberOfWeek) || selfDate.weekNumber < today.weekNumber) &&
+            selfDate.yearNumber == today.yearNumber
+    }
+
+    /// Is tomorrow
+    var isTomorrow: Bool {
+        Calendar.current.isDateInTomorrow(self)
+    }
+
+    /// Is yesterday
+    var isYesterday: Bool {
+        Calendar.current.isDateInYesterday(self)
+    }
+
     var startOfDay : Date {
         let calendar = Calendar.current
         let unitFlags = Set<Calendar.Component>([.year, .month, .day])
