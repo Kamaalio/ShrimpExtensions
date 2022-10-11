@@ -39,6 +39,13 @@ public extension Array where Element: Hashable {
 }
 
 public extension Array {
+    /// Concatenates 2 arrays together.
+    /// - Parameter otherArray: The other array to add to the current one.
+    /// - Returns: A concatenated array.
+    func concat(_ otherArray: [Element]) -> [Element] {
+        self + otherArray
+    }
+
     /// Sorts array by given keyPath using the given comparision result.
     /// - Parameters:
     ///   - keyPath: The keyPath of the object to sort by.

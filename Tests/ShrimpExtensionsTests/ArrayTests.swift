@@ -13,6 +13,22 @@ import Nimble
 final class ArraySpec: QuickSpec {
     override func spec() {
 
+        // - MARK: concat
+
+        describe("concat") {
+            let cases = [
+                ([1, 2], [3, 4], [1, 2, 3, 4]),
+                ([], [1, 2], [1, 2]),
+                ([1, 2], [], [1, 2]),
+            ]
+
+            for (firstArray, secondArray, result) in cases {
+                it("concatenates 2 arrays together") {
+                    expect(firstArray.concat(secondArray)) == result
+                }
+            }
+        }
+
         // - MARK: toSet
 
         describe("toSet") {
