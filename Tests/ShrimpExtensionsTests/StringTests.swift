@@ -38,6 +38,38 @@ extension StringTests {
     }
 }
 
+// - MARK: splitLines
+
+extension StringTests {
+    func testSplitLines() {
+        let cases: [(String, [String])] = [
+            ("\n\n", []),
+            ("\ni\n", ["i"]),
+            ("", []),
+            ("hi\nno", ["hi", "no"]),
+        ]
+        for (input, expected) in cases {
+            XCTAssertEqual(input.splitLines.map({ String($0) }), expected)
+        }
+    }
+}
+
+// - MARK: splitCommas
+
+extension StringTests {
+    func testSplitCommas() {
+        let cases: [(String, [String])] = [
+            (",,", []),
+            (",i,", ["i"]),
+            ("", []),
+            ("hi,no", ["hi", "no"]),
+        ]
+        for (input, expected) in cases {
+            XCTAssertEqual(input.splitCommas.map({ String($0) }), expected)
+        }
+    }
+}
+
 // - MARK: trimmingByWhitespacesAndNewLines
 
 extension StringTests {
