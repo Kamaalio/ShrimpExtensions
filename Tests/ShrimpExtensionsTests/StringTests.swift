@@ -10,6 +10,23 @@ import XCTest
 
 class StringTests: XCTestCase { }
 
+// - MARK: int
+
+extension StringTests {
+    func testInt() {
+        let cases: [(String, Int?)] = [
+            ("1", 1),
+            ("one", nil),
+            ("", nil),
+            ("l337", nil),
+            ("420", 420),
+        ]
+        for (input, expected) in cases {
+            XCTAssertEqual(input.int, expected)
+        }
+    }
+}
+
 // - MARK: splitByCapital
 
 extension StringTests {
