@@ -26,6 +26,11 @@ public extension String {
         return chunks
     }
 
+    /// Converts string to Int
+    var int: Int? {
+        Int(self)
+    }
+
     var trimmingByWhitespacesAndNewLines: String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
