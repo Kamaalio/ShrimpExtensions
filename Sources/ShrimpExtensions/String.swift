@@ -26,7 +26,17 @@ public extension String {
         return chunks
     }
 
-    /// Converts string to Int
+    /// Split String by newlines(\n)
+    var splitLines: [SubSequence] {
+        self.split(separator: "\n")
+    }
+
+    /// Split String by commas(,)
+    var splitCommas: [SubSequence] {
+        self.split(separator: ",")
+    }
+
+    /// Converts String to Int
     var int: Int? {
         Int(self)
     }
