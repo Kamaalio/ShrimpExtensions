@@ -74,3 +74,19 @@ public extension String {
         self[index(startIndex, offsetBy: offset)]
     }
 }
+
+extension StringProtocol {
+    /// Makes a range of the current string.
+    /// - Parameters:
+    ///   - start: from which index to start the range.
+    ///   - end: the index to end the range on.
+    /// - Returns: range of the current string.
+    public func range(from start: Int, to end: Int? = nil) -> Self.SubSequence {
+        var end = end ?? count
+        if end > count {
+            end = count
+        }
+
+        return self[self.index(self.startIndex, offsetBy: start)..<self.index(self.startIndex, offsetBy: end)]
+    }
+}

@@ -148,3 +148,22 @@ extension StringTests {
         XCTAssertEqual(character, expectedResult)
     }
 }
+
+// - MARK: range
+
+extension StringTests {
+    func testRange() {
+        let range = "Between the $dollar signs$ yes!".range(from: 13, to: 25)
+        XCTAssertEqual(range, "dollar signs")
+    }
+
+    func testRangeDefaultEnd() {
+        let range = "How cool am I?".range(from: 4)
+        XCTAssertEqual(range, "cool am I?")
+    }
+
+    func testRangeLateEnd() {
+        let range = "Cut early".range(from: 1, to: 100)
+        XCTAssertEqual(range, "ut early")
+    }
+}
