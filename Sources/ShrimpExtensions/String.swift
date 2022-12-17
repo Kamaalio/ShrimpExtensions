@@ -7,8 +7,27 @@
 
 import Foundation
 
-public extension String {
-    var splitByCapital: [String] {
+extension String {
+    public var nsString: NSString? {
+        NSString(utf8String: self)
+    }
+
+    public var uuid: UUID? {
+        UUID(uuidString: self)
+    }
+
+    public func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
+        guard !targets.isEmpty else { return self }
+        var stringToEdit = self.asArray()
+        for (index, character) in self.enumerated() where targets.contains(character) {
+            stringToEdit[index] = replacement
+        }
+        return String(stringToEdit)
+    }
+}
+
+extension StringProtocol {
+    public var splitByCapital: [String] {
         let indexes = Set(self
             .enumerated()
             .filter { $0.element.isUppercase }
@@ -27,55 +46,39 @@ public extension String {
     }
 
     /// Split String by newlines(\n)
-    var splitLines: [SubSequence] {
-        self.split(separator: "\n")
+    public var splitLines: [SubSequence] {
+        self.split(whereSeparator: \.isNewline)
     }
 
     /// Split String by commas(,)
-    var splitCommas: [SubSequence] {
+    public var splitCommas: [SubSequence] {
         self.split(separator: ",")
     }
 
     /// Converts String to Int
-    var int: Int? {
+    public var int: Int? {
         Int(self)
     }
 
-    var trimmingByWhitespacesAndNewLines: String {
+    public var trimmingByWhitespacesAndNewLines: String {
         self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
-    var nsString: NSString? {
-        NSString(utf8String: self)
-    }
-
-    var uuid: UUID? {
-        UUID(uuidString: self)
-    }
-
-    var scrambled: String {
+    public var scrambled: String {
         String(self.shuffled())
     }
 
-    var digits: String {
+    public var digits: String {
         components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 
-    func replaceMultipleOccurrences(of targets: [Character], with replacement: Character) -> String {
-        guard !targets.isEmpty else { return self }
-        var stringToEdit = self.asArray()
-        for (index, character) in self.enumerated() where targets.contains(character) {
-            stringToEdit[index] = replacement
-        }
-        return String(stringToEdit)
+    /// Splitting strings by new lines (\n).
+    /// - Parameter omittingEmptySubsequences: Whether or not to omit empty subsequences.
+    /// - Returns: A splitted string by new line.
+    func splitLines(omittingEmptySubsequences: Bool) -> [Self.SubSequence] {
+        return self.split(omittingEmptySubsequences: omittingEmptySubsequences, whereSeparator: \.isNewline)
     }
 
-    subscript(offset: Int) -> Character {
-        self[index(startIndex, offsetBy: offset)]
-    }
-}
-
-extension StringProtocol {
     /// Makes a range of the current string.
     /// - Parameters:
     ///   - start: from which index to start the range.
@@ -88,5 +91,9 @@ extension StringProtocol {
         }
 
         return self[self.index(self.startIndex, offsetBy: start)..<self.index(self.startIndex, offsetBy: end)]
+    }
+
+    public subscript(offset: Int) -> Character {
+        self[index(startIndex, offsetBy: offset)]
     }
 }
