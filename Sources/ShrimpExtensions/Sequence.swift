@@ -52,6 +52,24 @@ extension Sequence {
         [element] + self
     }
 
+    /// Maps and limits by given predicate.
+    /// - Parameters:
+    ///   - transform: Transform function.
+    ///   - predicate: Limit predicate.
+    /// - Returns: A mapped and limited sequence.
+    public func map<T>(_ transform: (Element) -> T, until predicate: (T) -> Bool) -> [T] {
+        var array: [T] = []
+        for element in self {
+            let transformedElement = transform(element)
+            array.append(transformedElement)
+            if predicate(transformedElement) {
+                return array
+            }
+        }
+
+        return array
+    }
+
     /// Returns the first element of the sequence that satisfies the given key path and comparison value.
     ///
     /// - Complexity: O(*n*), where *n* is the length of the sequence.

@@ -13,6 +13,23 @@ import ShrimpExtensions
 final class ArrayTests: QuickSpec {
     override func spec() {
 
+        // - MARK: map
+
+        describe("map") {
+            let cases: [([Int], Character, [Character])] = [
+                ([0, 1, 2], "2", ["0", "1", "2"]),
+                ([0, 1, 2], "1", ["0", "1"]),
+                ([0, 1, 2], "9", ["0", "1", "2"]),
+            ]
+            for (array, limit, expectedArray) in cases {
+                it("maps and limits untill predicate") {
+                    let array = array
+                        .map({ Character(String($0)) }, until: { $0 == limit })
+                    expect(array) == expectedArray
+                }
+            }
+        }
+
         // - MARK: uniques
 
         describe("uniques") {
