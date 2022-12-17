@@ -16,6 +16,11 @@ final class RangeTests: QuickSpec {
                 let range = 0..<3
                 expect(range.asArray()) == [0, 1, 2]
             }
+
+            it("transforms closed range to array") {
+                let range = 0...3
+                expect(range.asArray()) == [0, 1, 2, 3]
+            }
         }
     }
 }
