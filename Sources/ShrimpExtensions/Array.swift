@@ -34,6 +34,24 @@ extension Array {
         NSSet(array: self)
     }
 
+    /// Returns ranged array slice.
+    /// - Parameters:
+    ///   - start: Where to start the range.
+    ///   - end: Where to end the range.
+    /// - Returns: Ranged array slice.
+    public func ranged(from start: Int, to end: Int? = nil) -> ArraySlice<Element> {
+        var end = end ?? count
+        if end > count {
+            end = count
+        }
+        var start = start
+        if start > end {
+            start = end
+        }
+
+        return self[start..<end]
+    }
+
     /// Removes last element in array.
     /// Doesn't remove anything if array is empty.
     /// - Returns: An array with the last element removed

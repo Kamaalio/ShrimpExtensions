@@ -13,6 +13,23 @@ import ShrimpExtensions
 final class ArrayTests: QuickSpec {
     override func spec() {
 
+        // - MARK: ranged
+
+        describe("ranged") {
+            let cases: [([Int], Int, Int, [Int])] = [
+                ([0, 1, 2], 0, 3, [0, 1, 2]),
+                ([0, 1, 2], 1, 3, [1, 2]),
+                ([0, 1, 2], 0, 4, [0, 1, 2]),
+                ([0, 1, 2], 4, 4, []),
+                ([0, 1, 2], 10, 3, []),
+            ]
+            for (array, start, end, expectedArray) in cases {
+                it("ranges array") {
+                    expect(array.ranged(from: start, to: end).asArray()) == expectedArray
+                }
+            }
+        }
+
         // - MARK: map
 
         describe("map") {
