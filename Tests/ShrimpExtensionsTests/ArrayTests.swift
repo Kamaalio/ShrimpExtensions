@@ -7,10 +7,57 @@
 
 import Quick
 import Nimble
+import Foundation
 import ShrimpExtensions
 
 final class ArraySpec: QuickSpec {
     override func spec() {
+
+        // - MARK: uniques
+
+        describe("uniques") {
+            let cases = [
+                ([0, 1, 2], [0, 1, 2]),
+                ([0, 1, 1, 2], [0, 1, 2]),
+            ]
+            for (array, expectedArray) in cases {
+                it("keeps only unique elements") {
+                    expect(array.uniques()) == expectedArray
+                }
+            }
+        }
+
+        // - MARK: appended
+
+        describe("appended") {
+            it("appends element to array") {
+                let array = [0, 1, 2]
+                expect(array.appended(3)) == [0, 1, 2, 3]
+            }
+        }
+
+        // - MARK: removedLast
+
+        describe("removedLast") {
+            it("removes last element in array") {
+                let array = [0, 1, 2]
+                expect(array.removedLast()) == [0, 1]
+            }
+
+            it("doesn't do anything because array is already empty") {
+                let array: [Int] = []
+                expect(array.removedLast()) == []
+            }
+        }
+
+        // - MARK: asNSSet
+
+        describe("asNSSet") {
+            it("transforms array to an NSSet") {
+                let array = [0, 1, 2]
+                expect(array.asNSSet) == NSSet(array: [0, 1, 2])
+            }
+        }
 
         // - MARK: prepended
 

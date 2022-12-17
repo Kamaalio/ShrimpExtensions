@@ -13,13 +13,15 @@ extension Array where Element: Hashable {
         Set(self)
     }
 
+    /// Makes array only contain unique elements.
+    /// - Returns: An array with only unique elements.
     public func uniques() -> [Element] {
-        var buffer = Array()
+        var buffer: [Element] = []
         var added = Set<Element>()
-        self.forEach {
-            if !added.contains($0) {
-                buffer.append($0)
-                added.insert($0)
+        for element in self {
+            if !added.contains(element) {
+                buffer.append(element)
+                added.insert(element)
             }
         }
         return buffer
@@ -39,31 +41,6 @@ extension Array {
         var array = self
         _ = array.popLast()
         return array
-    }
-
-    /// Concatenates 2 arrays together.
-    /// - Parameter otherArray: The other array to add to the current one.
-    /// - Returns: A concatenated array.
-    public func concat(_ otherArray: [Element]) -> [Element] {
-        self + otherArray
-    }
-
-    /// Sorts array by given keyPath using the given comparision result.
-    /// - Parameters:
-    ///   - keyPath: The keyPath of the object to sort by.
-    ///   - comparison: The comparison method.
-    /// - Returns: A sorted array.
-    public func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>, using comparison: ComparisonResult) -> [Element] {
-        sorted(by: {
-            switch comparison {
-            case .orderedAscending:
-                return $0[keyPath: keyPath] < $1[keyPath: keyPath]
-            case .orderedDescending:
-                return $0[keyPath: keyPath] > $1[keyPath: keyPath]
-            case .orderedSame:
-                return $0[keyPath: keyPath] == $1[keyPath: keyPath]
-            }
-        })
     }
 
     /// Gets element at a specific given index. When a negative index has been given the indexing will be reversed.
@@ -107,18 +84,7 @@ extension Array {
         try self.firstIndex(where: predicate)
     }
 
-    /// Adds a new element at the end of the array and returns the result.
-    /// - Parameter newElement: The element to append to the array.
-    /// - Returns: The result of the array with an appended element
-    public func appended(_ newElement: Element) -> [Element] {
-        self + [newElement]
-    }
-
     public mutating func prepend(_ element: Element) {
         self.insert(element, at: 0)
-    }
-
-    public func prepended(_ element: Element) -> [Element] {
-        [element] + self
     }
 }
