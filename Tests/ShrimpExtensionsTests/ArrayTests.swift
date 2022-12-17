@@ -7,8 +7,7 @@
 
 import Quick
 import Nimble
-
-@testable import ShrimpExtensions
+import ShrimpExtensions
 
 final class ArraySpec: QuickSpec {
     override func spec() {
