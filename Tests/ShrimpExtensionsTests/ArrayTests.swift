@@ -10,7 +10,7 @@ import Nimble
 import Foundation
 import ShrimpExtensions
 
-final class ArraySpec: QuickSpec {
+final class ArrayTests: QuickSpec {
     override func spec() {
 
         // - MARK: uniques
