@@ -7,13 +7,13 @@
 
 import Foundation
 
-public extension Array where Element: Hashable {
+extension Array where Element: Hashable {
     /// Transforms array to a `Set`
-    var toSet: Set<Element> {
+    public var toSet: Set<Element> {
         Set(self)
     }
 
-    func uniques() -> [Element] {
+    public func uniques() -> [Element] {
         var buffer = Array()
         var added = Set<Element>()
         self.forEach {
@@ -26,11 +26,25 @@ public extension Array where Element: Hashable {
     }
 }
 
-public extension Array {
+extension Array {
+    /// Transforms `Array` to an `NSSet`
+    public var asNSSet: NSSet {
+        NSSet(array: self)
+    }
+
+    /// Removes last element in array.
+    /// Doesn't remove anything if array is empty.
+    /// - Returns: An array with the last element removed
+    public func removedLast() -> [Element] {
+        var array = self
+        _ = array.popLast()
+        return array
+    }
+
     /// Concatenates 2 arrays together.
     /// - Parameter otherArray: The other array to add to the current one.
     /// - Returns: A concatenated array.
-    func concat(_ otherArray: [Element]) -> [Element] {
+    public func concat(_ otherArray: [Element]) -> [Element] {
         self + otherArray
     }
 
@@ -39,7 +53,7 @@ public extension Array {
     ///   - keyPath: The keyPath of the object to sort by.
     ///   - comparison: The comparison method.
     /// - Returns: A sorted array.
-    func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>, using comparison: ComparisonResult) -> [Element] {
+    public func sorted<T: Comparable>(by keyPath: KeyPath<Element, T>, using comparison: ComparisonResult) -> [Element] {
         sorted(by: {
             switch comparison {
             case .orderedAscending:
@@ -55,8 +69,8 @@ public extension Array {
     /// Gets element at a specific given index. When a negative index has been given the indexing will be reversed.
     /// - Parameter index: A positive or negative index to access elements of this array.
     /// - Returns: Returns the element at the given index. If index is out of range, than this method will return nil.
-    func at(_ index: Int) -> Element? {
-        guard index < self.underestimatedCount else { return nil }
+    public func at(_ index: Int) -> Element? {
+        guard index < self.count else { return nil }
         if index >= 0 {
             return self[index]
         }
@@ -75,7 +89,7 @@ public extension Array {
     ///
     /// - Returns: The first index of the sequence that satisfies the given key path
     ///   and comparison value or nil if there is no element that satisfies the condition.
-    func findIndex<T: Equatable>(by keyPath: KeyPath<Element, T>, is comparisonValue: T) -> Int? {
+    public func findIndex<T: Equatable>(by keyPath: KeyPath<Element, T>, is comparisonValue: T) -> Int? {
         self.findIndex(where: { $0[keyPath: keyPath] == comparisonValue })
     }
 
@@ -89,27 +103,22 @@ public extension Array {
     ///
     /// - Returns: The first index of the sequence that satisfies `predicate`,
     ///   or `nil` if there is no element that satisfies `predicate`.
-    func findIndex(where predicate: (Element) throws -> Bool) rethrows -> Int? {
+    public func findIndex(where predicate: (Element) throws -> Bool) rethrows -> Int? {
         try self.firstIndex(where: predicate)
-    }
-
-    /// Transforms `Array` to an `NSSet`
-    var asNSSet: NSSet {
-        NSSet(array: self)
     }
 
     /// Adds a new element at the end of the array and returns the result.
     /// - Parameter newElement: The element to append to the array.
     /// - Returns: The result of the array with an appended element
-    func appended(_ newElement: Element) -> [Element] {
+    public func appended(_ newElement: Element) -> [Element] {
         self + [newElement]
     }
 
-    mutating func prepend(_ element: Element) {
+    public mutating func prepend(_ element: Element) {
         self.insert(element, at: 0)
     }
 
-    func prepended(_ element: Element) -> [Element] {
+    public func prepended(_ element: Element) -> [Element] {
         [element] + self
     }
 }
