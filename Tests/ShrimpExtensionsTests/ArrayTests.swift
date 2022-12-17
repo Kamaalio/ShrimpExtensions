@@ -13,6 +13,25 @@ import Nimble
 final class ArraySpec: QuickSpec {
     override func spec() {
 
+        // - MARK: prepended
+
+        describe("prepended") {
+            it("prepends to an array") {
+                let array = [0, 1, 2]
+                expect(array.prepended(-1)) == [-1, 0, 1, 2]
+            }
+        }
+
+        // - MARK: prepend
+
+        describe("prepend") {
+            it("prepends to an array") {
+                var array = [0, 1, 2]
+                array.prepend(-1)
+                expect(array) == [-1, 0, 1, 2]
+            }
+        }
+
         // - MARK: concat
 
         describe("concat") {
