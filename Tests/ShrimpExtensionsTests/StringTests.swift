@@ -10,6 +10,24 @@ import XCTest
 
 class StringTests: XCTestCase { }
 
+// - MARK: localizedStringToDouble
+
+extension StringTests {
+    func testLocalizedStringToDouble() throws {
+        let cases = [
+            ("0,213114", 0.213114),
+            ("1.154,74", 1_154.74),
+            ("420", 420),
+            ("4.20", 4.2),
+            ("4,20", 4.2),
+        ]
+        for (input, expectedResult) in cases {
+            let result = try XCTUnwrap(input.localizedStringToDouble)
+            XCTAssertEqual(result, expectedResult)
+        }
+    }
+}
+
 // - MARK: int
 
 extension StringTests {
