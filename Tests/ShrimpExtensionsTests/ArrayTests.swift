@@ -13,6 +13,22 @@ import ShrimpExtensions
 final class ArrayTests: QuickSpec {
     override func spec() {
 
+        // - MARK: removed
+
+        describe("removed") {
+            let cases = [
+                ([0, 1], [1], 0),
+                ([], [], 2),
+                ([1], [1], 1),
+                ([1], [], 0),
+            ]
+            for (input, expectedResult, elementIndexToRemove) in cases {
+                it("Removes given element") {
+                    expect(input.removed(at: elementIndexToRemove)) == expectedResult
+                }
+            }
+        }
+
         // - MARK: ranged
 
         describe("ranged") {
