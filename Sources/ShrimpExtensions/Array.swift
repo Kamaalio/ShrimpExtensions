@@ -52,6 +52,17 @@ extension Array {
         return self[start..<end]
     }
 
+    /// Removes element at the given index and returns a new array.
+    /// - Parameter index: The index of the element to remove.
+    /// - Returns: The given array with the item removed.
+    public func removed(at index: Int) -> [Element] {
+        var array = self
+        if index < count {
+            array.remove(at: index)
+        }
+        return array
+    }
+
     /// Removes last element in array.
     /// Doesn't remove anything if array is empty.
     /// - Returns: An array with the last element removed
